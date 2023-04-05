@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :forms_uploads, class_name: "Forms::Upload", dependent: :destroy
+
   def is_coach?
     self.type == "Users::Coach"
   end

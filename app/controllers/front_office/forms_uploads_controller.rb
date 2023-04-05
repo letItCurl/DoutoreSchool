@@ -3,7 +3,12 @@ class FrontOffice::FormsUploadsController < FrontOfficeController
 
   # GET /front_office/forms_uploads or /front_office/forms_uploads.json
   def index
-    @form_with_forms_uploads = Form.all.left_outer_joins(:forms_uploads).where(forms_uploads: { user: [current_user.id, nil] }).select("forms.*, forms_uploads.id as forms_upload_id")
+    raw_sql = <<~SQL
+      LEFT OUTER JOIN forms_uploads
+      ON "forms_uploads"."form_id" = "forms"."id"
+      AND "forms_uploads"."user_id" = '#{current_user.id}'
+    SQL
+    @form_with_forms_uploads = Form.all.joins(raw_sql).select("forms.*, forms_uploads.id as forms_upload_id")
   end
 
   # GET /front_office/forms_uploads/new

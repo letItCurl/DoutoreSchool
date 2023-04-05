@@ -10,6 +10,11 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <% if user_signed_in? && current_user.is_coach? && !controller_path.start_with?('back_office') %>
+      <div class="flex">
+        <%= link_to 'Coach access', back_office_forms_path, class: "bg-red-300 text-red-700 hover:bg-red-700 hover:text-white text-center text-sm font-medium w-full py-3", method: :delete %>
+      </div>
+    <% end %>
     <%= render 'shared/navbar' %>
     <div class="px-5">
       <% if notice %>

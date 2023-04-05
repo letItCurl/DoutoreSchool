@@ -8,13 +8,19 @@
   end
 -%>
 <% if back_office_form.id %>
-  <%= button_to "Destroy", back_office_form_path(back_office_form), class: "text-sm font-semibold leading-6 text-gray-900 bg-red-200 text-red-600 px-3 py-1 rounded", method: :delete %>
+  <div class="flex items-center mt-3">
+    <%= button_to "Destroy", back_office_form_path(back_office_form), class: "text-sm font-semibold leading-6 text-gray-900 bg-red-200 text-red-600 px-3 py-1 rounded", method: :delete %>
+    <div class="ml-3 text-sm text-gray-500">
+      Remaining submissions
+      <%= back_office_form.forms_uploads.only_student_uploads.count  %> / <%= Users::Student.count %>
+    </div>
+  </div>
 <% end %>
 <%= form_for(back_office_form, url: url, local: false, method: method) do |f| %>
   <%= render "users/shared/error_messages", resource: back_office_form %>
   <div class="space-y-12">
-    <div class="border-b border-gray-900/10 pb-12">
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+    <div class="border-b border-gray-900/10 pb-6">
+      <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-3">
           <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
           <div class="mt-2">
@@ -33,7 +39,7 @@
             <%= f.file_field :document %>
             <% if back_office_form.document.present? %>
               <div class="text-gray-500 mt-3">
-                <%= back_office_form.document.filename.to_s %>
+                <%= link_to back_office_form.document.filename.to_s, url_for(back_office_form.document) %>
               </div>
             <% end %>
           </div>
