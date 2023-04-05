@@ -1,0 +1,2 @@
+module FrontOffice::FormsUploadsHelper
+end

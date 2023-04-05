@@ -41,6 +41,7 @@
               <% if current_user.is_coach? %>
                 <%= link_to 'Forms', back_office_forms_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", method: :delete %>
               <% end %>
+              <%= link_to 'Forms Uploads', front_office_forms_uploads_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", method: :delete %>
             <% end %>
           </div>
         </div>

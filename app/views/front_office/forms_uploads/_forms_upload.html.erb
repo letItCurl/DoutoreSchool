@@ -1,0 +1,13 @@
+<%-
+  url = forms_upload.forms_upload_id.present? ?
+    edit_front_office_forms_upload_path(forms_upload.forms_upload_id) :
+    new_front_office_forms_upload_path(form_id: forms_upload.id)
+-%>
+<a href="<%= url %>" class="border mt-2 p-2 rounded w-full hover:bg-gray-100 flex justify-between items-center">
+  <div><%= forms_upload.title %></div>
+  <% if forms_upload.forms_upload_id.nil? %>
+    <div class="bg-red-200 text-red-500 px-3 py-1 rounded-full">TODO</div>
+  <% else %>
+    <div class="bg-green-200 text-green-500 px-3 py-1 rounded-full">DONE</div>
+  <% end %>
+</a>
