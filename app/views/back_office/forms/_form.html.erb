@@ -1,0 +1,48 @@
+<%-
+  if (back_office_form.id.present?)
+    url = back_office_form_path(back_office_form)
+    method = :patch
+  else
+    url = back_office_forms_path
+    method = :post
+  end
+-%>
+<% if back_office_form.id %>
+  <%= button_to "Destroy", back_office_form_path(back_office_form), class: "text-sm font-semibold leading-6 text-gray-900 bg-red-200 text-red-600 px-3 py-1 rounded", method: :delete %>
+<% end %>
+<%= form_for(back_office_form, url: url, local: false, method: method) do |f| %>
+  <%= render "users/shared/error_messages", resource: back_office_form %>
+  <div class="space-y-12">
+    <div class="border-b border-gray-900/10 pb-12">
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
+          <div class="mt-2">
+            <%= f.text_field :title, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+        <div class="col-span-full">
+          <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+          <div class="mt-2">
+            <%= f.text_area :description, rows: "3", class: "block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+        <div class="col-span-full">
+          <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Document</label>
+          <div class="mt-2">
+            <%= f.file_field :document %>
+            <% if back_office_form.document.present? %>
+              <div class="text-gray-500 mt-3">
+                <%= back_office_form.document.filename.to_s %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= link_to "Back to index", back_office_forms_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
+    <%= f.submit "Save", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  </div>
+<% end %>

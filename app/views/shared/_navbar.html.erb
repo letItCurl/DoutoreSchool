@@ -38,7 +38,9 @@
               <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
             <% end %>
             <% if user_signed_in? %>
-              <%= button_to 'Logout', destroy_user_session_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", method: :delete %>
+              <% if current_user.is_coach? %>
+                <%= link_to 'Forms', back_office_forms_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", method: :delete %>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -48,6 +50,7 @@
           <button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <%= current_user.email %>
           </button>
+          <%= button_to 'Logout', destroy_user_session_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium", method: :delete %>
         <% else %>
           <%= link_to 'Log in', new_user_session_path, class: "rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" %>
         <% end %>
