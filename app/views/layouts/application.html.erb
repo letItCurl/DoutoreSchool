@@ -6,22 +6,22 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
     <%= render 'shared/navbar' %>
-
+    <% if notice %>
+      <div class="w-100 bg-blue-300 p-3 m-3 rounded">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="w-100 bg-red-300 p-3 m-3 rounded">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
     <main class="container mx-auto mt-28 px-5 flex">
-
-
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-
       <%= yield %>
     </main>
   </body>
