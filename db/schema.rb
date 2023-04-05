@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_033206) do
     t.datetime "remember_created_at"
     t.string "first_name"
     t.string "last_name"
+    t.string "type", default: "Users::Student", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
